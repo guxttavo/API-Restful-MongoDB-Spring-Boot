@@ -2,6 +2,7 @@ package APIMongoDB.example.Project.services;
 
 import APIMongoDB.example.Project.domain.Users;
 import APIMongoDB.example.Project.repository.UsersRepository;
+import APIMongoDB.example.Project.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,13 @@ public class UsersService {
 
     }
 
+    public Users findById(String id) {
+        Users user = repo.findOne(id);
+        if (user == null) {
+            throw new ObjectNotFoundException("Objeto não encontrado!");
+        }
+        return user;
+    }
 
 
 }

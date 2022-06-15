@@ -1,6 +1,7 @@
 package APIMongoDB.example.Project.services;
 
 import APIMongoDB.example.Project.domain.Users;
+import APIMongoDB.example.Project.dto.UsersDTO;
 import APIMongoDB.example.Project.repository.UsersRepository;
 import APIMongoDB.example.Project.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,14 @@ public class UsersService {
             throw new ObjectNotFoundException("Objeto não encontrado!");
         }
         return user;
+    }
+
+    public Users insert(Users obj) {
+        return repo.insert(obj);
+    }
+
+    public Users fromDTO(UsersDTO objDto) {
+        return new Users(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
 
